@@ -8,23 +8,12 @@ import InputCheckbox from './InputCheckbox';
 import propsFormTypes from '../types/types';
 
 class Form extends Component {
-/*   state = {
-    name: '',
-  }
-
-  handleName = ({ target }) => {
-    console.log(target.value);
-    this.setState({
-      name: target.value,
-    });q
-  } */
-
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2,
       cardAttr3, cardImage, cardRare, cardTrunfo,
       isSaveButtonDisabled, onInputChange, onSaveButtonClick } = this.props;
     return (
-      <div className="Form">
+      <form className="Form">
         <h1>Criar nova carta</h1>
         <InputName cardName={ cardName } onInputChange={ onInputChange } />
         <TextAreaDescription
@@ -48,7 +37,7 @@ class Form extends Component {
         >
           Salvar
         </button>
-      </div>
+      </form>
     );
   }
 }
