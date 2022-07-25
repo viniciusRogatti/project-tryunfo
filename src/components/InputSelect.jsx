@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+import propsFormTypes from '../types/types';
 
 export default class InputSelect extends Component {
   render() {
+    const { cardRare, onInputChange } = this.props;
     return (
       <label htmlFor="select">
         Selecionar raridade
-        <select id="select" data-testid="rare-input" name="select-rarity">
+        <select
+          onChange={ onInputChange }
+          value={ cardRare }
+          id="select"
+          data-testid="rare-input"
+          name="select-rarity"
+        >
           <option value="normal">
             normal
           </option>
@@ -20,3 +28,5 @@ export default class InputSelect extends Component {
     );
   }
 }
+
+InputSelect.propTypes = propsFormTypes;

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-// import propTypes from 'prop-types';
+import propsFormTypes from '../types/types';
 
 export default class TextAreaDescription extends Component {
   render() {
-    // const { value } = this.props;
+    const { cardDescription, onInputChange } = this.props;
     return (
       <label htmlFor="description-card">
         Descrição
         <textarea
+          value={ cardDescription }
+          onChange={ onInputChange }
           data-testid="description-input"
           id="description-card"
           name="description"
@@ -20,6 +22,4 @@ export default class TextAreaDescription extends Component {
   }
 }
 
-/* TextAreaDescription.propTypes = {
-  value: propTypes.string.isRequired,
-}; */
+TextAreaDescription.propTypes = propsFormTypes;
