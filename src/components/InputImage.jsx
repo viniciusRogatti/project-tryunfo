@@ -10,6 +10,7 @@ export default class InputImage extends Component {
         <input
           value={ cardImage }
           onChange={ onInputChange }
+          name="cardImage"
           data-testid="image-input"
           id="image-input"
           type="text"

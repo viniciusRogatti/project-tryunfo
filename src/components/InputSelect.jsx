@@ -12,7 +12,7 @@ export default class InputSelect extends Component {
           value={ cardRare }
           id="select"
           data-testid="rare-input"
-          name="select-rarity"
+          name="cardRare"
         >
           <option value="normal">
             normal

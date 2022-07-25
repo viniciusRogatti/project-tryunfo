@@ -11,6 +11,7 @@ export default class InputName extends Component {
         Nome
         <input
           onChange={ onInputChange }
+          name="cardName"
           value={ cardName }
           data-testid="name-input"
           id="name-card"

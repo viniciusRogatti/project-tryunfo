@@ -10,7 +10,7 @@ export default class InputCheckbox extends Component {
         onChange={ onInputChange }
         data-testid="trunfo-input"
         type="checkbox"
-        name="superTrunfo"
+        name="cardTrunfo"
       />
     );
   }

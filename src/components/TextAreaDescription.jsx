@@ -12,7 +12,7 @@ export default class TextAreaDescription extends Component {
           onChange={ onInputChange }
           data-testid="description-input"
           id="description-card"
-          name="description"
+          name="cardDescription"
           cols="30"
           rows="10"
           max-width="10"

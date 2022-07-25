@@ -9,6 +9,7 @@ export default class AttrInput extends Component {
         <label htmlFor="attr1">
           Attr1
           <input
+            name="cardAttr1"
             value={ cardAttr1 }
             onChange={ onInputChange }
             id="attr1"
@@ -19,6 +20,7 @@ export default class AttrInput extends Component {
         <label htmlFor="attr2">
           Attr2
           <input
+            name="cardAttr2"
             value={ cardAttr2 }
             onChange={ onInputChange }
             id="attr2"
@@ -29,6 +31,7 @@ export default class AttrInput extends Component {
         <label htmlFor="attr3">
           Attr3
           <input
+            name="cardAttr3"
             value={ cardAttr3 }
             onChange={ onInputChange }
             id="attr3"
