@@ -19,7 +19,7 @@ export default class Card extends Component {
         { cardAttr1 ? <p className="attr1" data-testid="attr1-card">{cardAttr1}</p> : ''}
         { cardAttr2 ? <p className="attr2" data-testid="attr2-card">{cardAttr2}</p> : ''}
         { cardAttr3 ? <p className="attr3" data-testid="attr3-card">{cardAttr3}</p> : ''}
-        <p className="rare" data-testid="rare-card">{cardRare}</p>
+        { cardRare && <p className="rare" data-testid="rare-card">{cardRare}</p>}
         { cardTrunfo ? <span data-testid="trunfo-card">Super Trunfo</span> : '' }
       </div>
     );

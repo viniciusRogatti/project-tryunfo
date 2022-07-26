@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './components/Card';
+import Deck from './components/Deck';
 import Form from './components/Form';
 
 import './index.css';
@@ -89,7 +90,7 @@ class App extends React.Component {
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2,
       cardAttr3, cardImage, cardRare, cardTrunfo,
-      isSaveButtonDisabled, hasTrunfo } = this.state;
+      isSaveButtonDisabled, hasTrunfo, cardSave } = this.state;
     return (
       <div className="App">
         <h1>Tryunfo</h1>
@@ -116,12 +117,10 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          onInputChange={ this.onInputChange }
         />
+        <Deck cardSave={ cardSave } />
       </div>
     );
   }
 }
-
 export default App;

@@ -4,8 +4,8 @@ import TextAreaDescription from './TextAreaDescription';
 import AttrInput from './AttrInput';
 import InputImage from './InputImage';
 import InputSelect from './InputSelect';
-import propsFormTypes from '../types/types';
 import InputCheckbox from './InputCheckbox';
+import propsFormTypes from '../types/types';
 
 class Form extends Component {
   render() {
