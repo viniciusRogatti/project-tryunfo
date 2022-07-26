@@ -20,4 +20,4 @@ export default class InputImage extends Component {
   }
 }
 
-InputImage.propTypes = propsFormTypes;
+InputImage.propTypes = (propsFormTypes.cardImage, propsFormTypes.onInputChange);

@@ -29,4 +29,4 @@ export default class InputSelect extends Component {
   }
 }
 
-InputSelect.propTypes = propsFormTypes;
+InputSelect.propTypes = (propsFormTypes.cardRare, propsFormTypes.onInputChange);

@@ -1,26 +1,49 @@
 import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
+
 import './index.css';
-import propsFormTypes from './types/types';
 
 class App extends React.Component {
   state = {
     cardName: '',
     cardDescription: '',
-    cardAttr1: '',
-    cardAttr2: '',
-    cardAttr3: '',
+    cardAttr1: 0,
+    cardAttr2: 0,
+    cardAttr3: 0,
     cardImage: '',
     cardRare: '',
     cardTrunfo: false,
-    isSaveButtonDisabled: false,
+    isSaveButtonDisabled: true,
   }
+
+  checkNumber = () => {
+    const { cardAttr1, cardAttr2, cardAttr3, cardName,
+      cardDescription, cardImage, cardRare } = this.state;
+    const array = [cardAttr1, cardAttr2, cardAttr3];
+    const arrayIputs = [cardName, cardDescription, cardImage, cardRare];
+    const checkLength = arrayIputs.some((e) => e === '');
+    const maxNumber = 90;
+    const maxAttr = 210;
+    const sum = array.reduce((acc, curr) => acc + parseInt(curr, 10), 0);
+    const verification = array.some((number) => parseInt(number, 10)
+      > maxNumber || parseInt(number, 10) < 0);
+    const verificationSum = sum > maxAttr;
+    console.log(checkLength);
+    console.log(verification);
+    console.log(verificationSum);
+    const result = verification || verificationSum || checkLength;
+    console.log(result);
+    return result;
+  };
 
   onInputChange = ({ target }) => {
     const { value, checked, name } = target;
     const key = target.type === 'checkbox' ? checked : value;
-    this.setState({ [name]: key });
+    console.log(this.checkNumber());
+    this.setState({ [name]: key }, () => {
+      this.setState({ isSaveButtonDisabled: this.checkNumber() });
+    });
   };
 
   render() {
@@ -58,7 +81,5 @@ class App extends React.Component {
     );
   }
 }
-
-App.propTypes = propsFormTypes;
 
 export default App;

@@ -22,4 +22,7 @@ export default class Card extends Component {
   }
 }
 
-Card.propTypes = propsFormTypes;
+Card.propTypes = (propsFormTypes.cardImage, propsFormTypes.cardDescription,
+propsFormTypes.cardAttr1, propsFormTypes.cardAttr2, propsFormTypes.cardAttr3,
+propsFormTypes.cardImage, propsFormTypes.cardRare, propsFormTypes.cardTrunfo
+);

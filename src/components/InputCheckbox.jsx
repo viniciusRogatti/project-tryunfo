@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import propsFormTypes from '../types/types';
+import PropTypes from 'prop-types';
 
 export default class InputCheckbox extends Component {
   render() {
@@ -16,4 +16,7 @@ export default class InputCheckbox extends Component {
   }
 }
 
-InputCheckbox.propTypes = propsFormTypes;
+InputCheckbox.propTypes = {
+  cardTrunfo: PropTypes.bool.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+};

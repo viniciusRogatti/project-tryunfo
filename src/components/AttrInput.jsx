@@ -44,4 +44,9 @@ export default class AttrInput extends Component {
   }
 }
 
-AttrInput.propTypes = propsFormTypes;
+AttrInput.propTypes = (
+  propsFormTypes.cardAttr1,
+  propsFormTypes.cardAttr2,
+  propsFormTypes.cardAttr3,
+  propsFormTypes.onInputChange
+);

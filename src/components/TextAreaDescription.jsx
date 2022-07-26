@@ -22,4 +22,5 @@ export default class TextAreaDescription extends Component {
   }
 }
 
-TextAreaDescription.propTypes = propsFormTypes;
+TextAreaDescription.propTypes = (propsFormTypes.cardDescription,
+propsFormTypes.onInputChange);

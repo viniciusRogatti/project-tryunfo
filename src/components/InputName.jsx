@@ -23,9 +23,4 @@ export default class InputName extends Component {
   }
 }
 
-InputName.propTypes = propsFormTypes;
-
-/* InputName.propTypes = {
-  handleName: PropTypes.func.isRequired,
-};
- */
+InputName.propTypes = (propsFormTypes.cardName, propsFormTypes.onInputChange);
