@@ -11,7 +11,7 @@ class Form extends Component {
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2,
       cardAttr3, cardImage, cardRare, cardTrunfo,
-      isSaveButtonDisabled, onInputChange, onSaveButtonClick } = this.props;
+      isSaveButtonDisabled, onInputChange, onSaveButtonClick, hasTrunfo } = this.props;
     return (
       <form className="Form">
         <h2>Criar nova carta</h2>
@@ -28,7 +28,10 @@ class Form extends Component {
         />
         <InputImage cardImage={ cardImage } onInputChange={ onInputChange } />
         <InputSelect cardRare={ cardRare } onInputChange={ onInputChange } />
-        <InputCheckbox cardTrunfo={ cardTrunfo } onInputChange={ onInputChange } />
+        { hasTrunfo ? 'Você já tem um Super Trunfo em seu baralho' : <InputCheckbox
+          cardTrunfo={ cardTrunfo }
+          onInputChange={ onInputChange }
+        />}
         <button
           disabled={ isSaveButtonDisabled }
           onClick={ onSaveButtonClick }
