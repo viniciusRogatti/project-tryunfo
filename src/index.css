@@ -8,14 +8,24 @@
 .App
 {
   display: flex;
-  flex-direction: column;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.App h1
+{
+  display: flex;
+  justify-content: center;
+  width: 100vw;
 }
 
 .Form
 {
   margin: 30px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   width: 300px;
   height: 500px;
@@ -32,4 +42,17 @@
 {
   display: flex;
   flex-direction: column;
+}
+
+.container-card
+{
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 300px;
+  height: 500px;
+  background: linear-gradient(rgb(91, 197, 91), rgb(15, 70, 22) );
+  border-radius: 4px;
 }

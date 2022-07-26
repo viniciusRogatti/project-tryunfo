@@ -6,6 +6,7 @@ import './index.css';
 
 class App extends React.Component {
   state = {
+    cardSave: [],
     cardName: '',
     cardDescription: '',
     cardAttr1: 0,
@@ -17,34 +18,60 @@ class App extends React.Component {
     isSaveButtonDisabled: true,
   }
 
-  checkNumber = () => {
-    const { cardAttr1, cardAttr2, cardAttr3, cardName,
-      cardDescription, cardImage, cardRare } = this.state;
-    const array = [cardAttr1, cardAttr2, cardAttr3];
-    const arrayIputs = [cardName, cardDescription, cardImage, cardRare];
-    const checkLength = arrayIputs.some((e) => e === '');
+  checkAttributes = () => {
+    const { cardAttr1, cardAttr2, cardAttr3 } = this.state;
+    const arrayAttr = [cardAttr1, cardAttr2, cardAttr3];
     const maxNumber = 90;
     const maxAttr = 210;
-    const sum = array.reduce((acc, curr) => acc + parseInt(curr, 10), 0);
-    const verification = array.some((number) => parseInt(number, 10)
-      > maxNumber || parseInt(number, 10) < 0);
+    const sum = arrayAttr.reduce((acc, curr) => acc + parseInt(curr, 10), 0);
+    const checKNunbers = arrayAttr.some((number) => parseInt(number, 10) > maxNumber
+    || parseInt(number, 10) < 0 || number === '');
     const verificationSum = sum > maxAttr;
-    console.log(checkLength);
-    console.log(verification);
-    console.log(verificationSum);
-    const result = verification || verificationSum || checkLength;
-    console.log(result);
-    return result;
+    return checKNunbers || verificationSum;
+  }
+
+  validation = () => {
+    const { cardName, cardDescription, cardImage, cardRare } = this.state;
+    const arrayIputs = [cardName, cardDescription, cardImage, cardRare];
+    const checKEmpty = arrayIputs.some((e) => e === '');
+    const validationAtrrs = this.checkAttributes();
+    return validationAtrrs || checKEmpty;
   };
 
   onInputChange = ({ target }) => {
-    const { value, checked, name } = target;
-    const key = target.type === 'checkbox' ? checked : value;
-    console.log(this.checkNumber());
+    const { value, checked, name, type } = target;
+    const key = type === 'checkbox' ? checked : value;
     this.setState({ [name]: key }, () => {
-      this.setState({ isSaveButtonDisabled: this.checkNumber() });
+      this.setState({ isSaveButtonDisabled: this.validation() });
     });
   };
+
+  onSaveButtonClick = (event) => {
+    const { cardName, cardDescription, cardAttr1, cardAttr2,
+      cardAttr3, cardImage, cardRare, cardTrunfo } = this.state;
+    event.preventDefault();
+    const newCard = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    };
+    this.setState((prevState) => ({
+      cardSave: [...prevState.cardSave, newCard],
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardImage: '',
+      cardRare: '',
+      cardTrunfo: false,
+    }));
+  }
 
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2,
@@ -64,6 +91,7 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.onInputChange }
+          onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card
           cardName={ cardName }

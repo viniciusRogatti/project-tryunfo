@@ -14,7 +14,7 @@ class Form extends Component {
       isSaveButtonDisabled, onInputChange, onSaveButtonClick } = this.props;
     return (
       <form className="Form">
-        <h1>Criar nova carta</h1>
+        <h2>Criar nova carta</h2>
         <InputName cardName={ cardName } onInputChange={ onInputChange } />
         <TextAreaDescription
           cardDescription={ cardDescription }
