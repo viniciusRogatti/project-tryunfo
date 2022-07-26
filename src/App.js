@@ -59,11 +59,22 @@ class App extends React.Component {
     });
   };
 
+  deleteCard = ({ target }) => {
+    const { id } = target;
+    const { cardSave, hasTrunfo } = this.state;
+    const newCardList = cardSave.filter((card) => card.id !== Number(id));
+    // hasTrunfo ? this.setState({ hasTrunfo: false, cardSave: newCardList }) : this.setState({cardSave: newCardList });
+    this.setState({ cardSave: newCardList });
+    if (hasTrunfo) this.setState({ hasTrunfo: false });
+  }
+
   onSaveButtonClick = (event) => {
+    const limited = 500;
     const { cardName, cardDescription, cardAttr1, cardAttr2,
       cardAttr3, cardImage, cardRare, cardTrunfo } = this.state;
     event.preventDefault();
     const newCard = {
+      id: Math.floor(Math.random() * limited + 1),
       cardName,
       cardDescription,
       cardAttr1,
@@ -92,33 +103,35 @@ class App extends React.Component {
       cardAttr3, cardImage, cardRare, cardTrunfo,
       isSaveButtonDisabled, hasTrunfo, cardSave } = this.state;
     return (
-      <div className="App">
+      <div className="container">
         <h1>Tryunfo</h1>
-        <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
-          hasTrunfo={ hasTrunfo }
-        />
-        <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-        />
-        <Deck cardSave={ cardSave } />
+        <div className="App">
+          <Form
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            isSaveButtonDisabled={ isSaveButtonDisabled }
+            onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
+            hasTrunfo={ hasTrunfo }
+          />
+          <Card
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+          />
+          <Deck cardSave={ cardSave } deleteCard={ this.deleteCard } />
+        </div>
       </div>
     );
   }
