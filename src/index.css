@@ -62,3 +62,9 @@
   background: linear-gradient(rgb(91, 197, 91), rgb(15, 70, 22) );
   border-radius: 4px;
 }
+
+.Deck
+{
+  width: 200px;
+  height: 400px;
+}
