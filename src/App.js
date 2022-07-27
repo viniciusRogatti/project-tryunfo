@@ -19,6 +19,7 @@ class App extends React.Component {
     isSaveButtonDisabled: true,
     hasTrunfo: false,
     listFilter: [],
+    superTrunfo: false,
   }
 
   checkAttributes = () => {
@@ -72,6 +73,17 @@ filterRare = ({ target }) => {
   return this.setState({ listFilter: newList });
 }
 
+filterSuperTrunfo = ({ target }) => {
+  const { checked } = target;
+  const { cardSave } = this.state;
+  const cardSuperTrunfo = cardSave.filter((card) => card.cardTrunfo === true);
+  if (cardSuperTrunfo.length <= 0) return;
+  this.setState({
+    superTrunfo: checked,
+    listFilter: cardSuperTrunfo,
+  });
+}
+
   onInputChange = ({ target }) => {
     const { value, checked, name, type } = target;
     const key = type === 'checkbox' ? checked : value;
@@ -87,7 +99,6 @@ filterRare = ({ target }) => {
     const { id } = target;
     const { cardSave, hasTrunfo } = this.state;
     const newCardList = cardSave.filter((card) => card.id !== Number(id));
-    // hasTrunfo ? this.setState({ hasTrunfo: false, cardSave: newCardList }) : this.setState({cardSave: newCardList });
     this.setState({ cardSave: newCardList });
     if (hasTrunfo) this.setState({ hasTrunfo: false });
   }
@@ -125,7 +136,7 @@ filterRare = ({ target }) => {
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2,
       cardAttr3, cardImage, cardRare, cardTrunfo,
-      isSaveButtonDisabled, hasTrunfo, cardSave, listFilter } = this.state;
+      isSaveButtonDisabled, hasTrunfo, cardSave, listFilter, superTrunfo } = this.state;
 
     const exibList = listFilter.length > 0 ? listFilter : cardSave;
     const element = exibList.length > 0
@@ -164,6 +175,7 @@ filterRare = ({ target }) => {
             Pesquisar carta por nome
             <br />
             <input
+              disabled={ superTrunfo }
               id="filterNameCard"
               type="text"
               name="cardName"
@@ -175,6 +187,7 @@ filterRare = ({ target }) => {
           <label htmlFor="filterRareCard">
             Pesquisar carta por raridade
             <select
+              disabled={ superTrunfo }
               data-testid="rare-filter"
               onChange={ this.filterRare }
               name="cardRame"
@@ -192,6 +205,15 @@ filterRare = ({ target }) => {
                 muito raro
               </option>
             </select>
+          </label>
+          <label htmlFor="SuperTrunfo">
+            Super Trunfo
+            <input
+              id="SuperTrunfo"
+              type="checkbox"
+              data-testid="trunfo-filter"
+              onChange={ this.filterSuperTrunfo }
+            />
           </label>
           <div>
             { element }
