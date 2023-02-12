@@ -10,9 +10,9 @@ export default class Deck extends Component {
   render() {
     const { cardSave, deleteCard } = this.props;
     return (
-      <div>
+      <div className="conteiner-deck">
         {cardSave.map((card) => (
-          <div key={ card.id }>
+          <div className="card-deck" key={ card.id }>
             <Card
               key={ card.cardName }
               cardName={ card.cardName }

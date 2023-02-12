@@ -1,7 +1,8 @@
 import React from 'react';
-import Card from './components/Card';
+import PreviewCard from './components/PreviewCard';
 import Deck from './components/Deck';
 import Form from './components/Form';
+// import saoCharacters from './components/data';
 
 import './index.css';
 
@@ -14,7 +15,7 @@ class App extends React.Component {
     cardAttr2: 0,
     cardAttr3: 0,
     cardImage: '',
-    cardRare: '',
+    cardRare: 'comum',
     cardTrunfo: false,
     isSaveButtonDisabled: true,
     hasTrunfo: false,
@@ -27,9 +28,9 @@ class App extends React.Component {
     const arrayAttr = [cardAttr1, cardAttr2, cardAttr3];
     const maxNumber = 90;
     const maxAttr = 210;
-    const sum = arrayAttr.reduce((acc, curr) => acc + parseInt(curr, 10), 0);
-    const checKNumbers = arrayAttr.some((number) => parseInt(number, 10) > maxNumber
-      || parseInt(number, 10) < 0 || number === '');
+    const sum = arrayAttr.reduce((acc, curr) => acc + Number(curr), 0);
+    const checKNumbers = arrayAttr.some((number) => Number(number) > maxNumber
+      || Number(number) < 0);
     const verificationSum = sum > maxAttr;
     return checKNumbers || verificationSum;
   }
@@ -59,7 +60,7 @@ class App extends React.Component {
     }
     const newList = cardSave.filter((card) => card.cardName.includes(value));
     if (newList.length <= 0) {
-      return this.setState({ listFilter: [''] });
+      return this.setState({ listFilter: cardSave });
     }
     this.setState({ listFilter: newList });
   }
@@ -69,7 +70,7 @@ filterRare = ({ target }) => {
   const { cardSave } = this.state;
   if (value === 'todas') return this.setState({ listFilter: cardSave });
   const newList = cardSave.filter((card) => card.cardRare === value);
-  if (newList.length <= 0) return this.setState({ listFilter: [''] });
+  if (newList.length <= 0) return this.setState({ listFilter: cardSave });
   return this.setState({ listFilter: newList });
 }
 
@@ -80,16 +81,19 @@ filterSuperTrunfo = ({ target }) => {
   if (cardSuperTrunfo.length <= 0) return;
   this.setState({
     superTrunfo: checked,
-    listFilter: cardSuperTrunfo,
+    listFilter: (checked ? cardSuperTrunfo : cardSave),
   });
 }
 
   onInputChange = ({ target }) => {
-    const { value, checked, name, type } = target;
+    const { value, checked, name, type, files } = target;
     const key = type === 'checkbox' ? checked : value;
+    const filesImage = files;
+    if (files) {
+      return this.setState({ cardImage: URL.createObjectURL(filesImage[0]) });
+    }
     this.setState({
       [name]: key,
-      hasTrunfo: this.isTrunfo(),
     }, () => {
       this.setState({ isSaveButtonDisabled: this.validation() });
     });
@@ -99,7 +103,10 @@ filterSuperTrunfo = ({ target }) => {
     const { id } = target;
     const { cardSave, hasTrunfo } = this.state;
     const newCardList = cardSave.filter((card) => card.id !== Number(id));
-    this.setState({ cardSave: newCardList });
+    this.setState({
+      cardSave: newCardList,
+      listFilter: newCardList,
+    });
     if (hasTrunfo) this.setState({ hasTrunfo: false });
   }
 
@@ -108,8 +115,7 @@ filterSuperTrunfo = ({ target }) => {
     const { cardName, cardDescription, cardAttr1, cardAttr2,
       cardAttr3, cardImage, cardRare, cardTrunfo } = this.state;
     event.preventDefault();
-    const newCard = {
-      id: Math.floor(Math.random() * limited + 1),
+    const newCard = { id: Math.floor(Math.random() * limited + 1),
       cardName,
       cardDescription,
       cardAttr1,
@@ -127,10 +133,14 @@ filterSuperTrunfo = ({ target }) => {
       cardAttr2: 0,
       cardAttr3: 0,
       cardImage: '',
-      cardRare: '',
+      cardRare: 'comum',
       cardTrunfo: false,
+      listFilter: [...prevState.cardSave, newCard],
     }));
-    this.setState({ hasTrunfo: this.isTrunfo() });
+    this.setState({
+      hasTrunfo: cardTrunfo ? true : this.isTrunfo(),
+      isSaveButtonDisabled: true,
+    });
   }
 
   render() {
@@ -143,34 +153,34 @@ filterSuperTrunfo = ({ target }) => {
       ? <Deck cardSave={ exibList } deleteCard={ this.deleteCard } /> : '';
     return (
       <div className="container">
-        <h1>Tryunfo</h1>
-        <div>
-          <div className="App">
-            <Form
-              cardName={ cardName }
-              cardRare={ cardRare }
-              cardAttr1={ cardAttr1 }
-              cardAttr2={ cardAttr2 }
-              cardAttr3={ cardAttr3 }
-              hasTrunfo={ hasTrunfo }
-              cardImage={ cardImage }
-              cardTrunfo={ cardTrunfo }
-              onInputChange={ this.onInputChange }
-              cardDescription={ cardDescription }
-              onSaveButtonClick={ this.onSaveButtonClick }
-              isSaveButtonDisabled={ isSaveButtonDisabled }
-            />
-            <Card
-              cardRare={ cardRare }
-              cardName={ cardName }
-              cardAttr1={ cardAttr1 }
-              cardAttr2={ cardAttr2 }
-              cardAttr3={ cardAttr3 }
-              cardImage={ cardImage }
-              cardTrunfo={ cardTrunfo }
-              cardDescription={ cardDescription }
-            />
-          </div>
+        <h1>Sword Art Online Tryunfo</h1>
+        <div className="create-card-container">
+          <Form
+            cardName={ cardName }
+            cardRare={ cardRare }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            hasTrunfo={ hasTrunfo }
+            cardImage={ cardImage }
+            cardTrunfo={ cardTrunfo }
+            onInputChange={ this.onInputChange }
+            cardDescription={ cardDescription }
+            onSaveButtonClick={ this.onSaveButtonClick }
+            isSaveButtonDisabled={ isSaveButtonDisabled }
+          />
+          <PreviewCard
+            cardRare={ cardRare }
+            cardName={ cardName }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardTrunfo={ cardTrunfo }
+            cardDescription={ cardDescription }
+          />
+        </div>
+        <div className="container-filter">
           <label htmlFor="filterNameCard">
             Pesquisar carta por nome
             <br />
@@ -195,8 +205,8 @@ filterSuperTrunfo = ({ target }) => {
               <option value="todas">
                 todas
               </option>
-              <option value="normal">
-                normal
+              <option value="comum">
+                comum
               </option>
               <option value="raro">
                 raro
@@ -215,9 +225,9 @@ filterSuperTrunfo = ({ target }) => {
               onChange={ this.filterSuperTrunfo }
             />
           </label>
-          <div>
-            { element }
-          </div>
+        </div>
+        <div className="container-cards">
+          { element }
         </div>
       </div>
     );

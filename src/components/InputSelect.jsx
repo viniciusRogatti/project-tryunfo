@@ -6,7 +6,7 @@ export default class InputSelect extends Component {
     const { cardRare, onInputChange } = this.props;
     return (
       <label htmlFor="select">
-        Selecionar raridade
+        Selecionar raridade:
         <select
           onChange={ onInputChange }
           value={ cardRare }
@@ -14,13 +14,13 @@ export default class InputSelect extends Component {
           data-testid="rare-input"
           name="cardRare"
         >
-          <option value="normal">
-            normal
+          <option value="comum">
+            comum
           </option>
           <option value="raro">
             raro
           </option>
-          <option value="muito raro">
+          <option value="muitoRaro">
             muito raro
           </option>
         </select>

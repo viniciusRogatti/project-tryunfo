@@ -6,15 +6,16 @@ export default class TextAreaDescription extends Component {
     const { cardDescription, onInputChange } = this.props;
     return (
       <label htmlFor="description-card">
-        Descrição
-        <textarea
+        Apelido
+        <br />
+        <input
+          type="text"
           value={ cardDescription }
           onChange={ onInputChange }
           data-testid="description-input"
           id="description-card"
           name="cardDescription"
-          cols="30"
-          rows="10"
+          maxLength={ 20 }
           max-width="10"
         />
       </label>

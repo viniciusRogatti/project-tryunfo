@@ -3,17 +3,18 @@ import propsFormTypes from '../types/types';
 
 export default class InputImage extends Component {
   render() {
-    const { cardImage, onInputChange } = this.props;
+    const { onInputChange } = this.props;
     return (
-      <label htmlFor="image-input">
-        Imagem
+      <label htmlFor="image-input" id="image-label">
+        Enviar Imagem
+        <br />
         <input
-          value={ cardImage }
           onChange={ onInputChange }
           name="cardImage"
           data-testid="image-input"
           id="image-input"
-          type="text"
+          type="file"
+          accept="image/*"
         />
       </label>
     );

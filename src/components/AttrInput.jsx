@@ -5,9 +5,9 @@ export default class AttrInput extends Component {
   render() {
     const { cardAttr1, cardAttr2, cardAttr3, onInputChange } = this.props;
     return (
-      <div className="container-atributes">
+      <div className="attrs-form">
         <label htmlFor="attr1">
-          Attr1
+          Atk
           <input
             name="cardAttr1"
             value={ cardAttr1 }
@@ -18,7 +18,7 @@ export default class AttrInput extends Component {
           />
         </label>
         <label htmlFor="attr2">
-          Attr2
+          Def
           <input
             name="cardAttr2"
             value={ cardAttr2 }
@@ -29,7 +29,7 @@ export default class AttrInput extends Component {
           />
         </label>
         <label htmlFor="attr3">
-          Attr3
+          Vel
           <input
             name="cardAttr3"
             value={ cardAttr3 }

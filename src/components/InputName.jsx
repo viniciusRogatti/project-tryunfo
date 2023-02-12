@@ -9,8 +9,10 @@ export default class InputName extends Component {
     return (
       <label htmlFor="name-card">
         Nome
+        <br />
         <input
           onChange={ onInputChange }
+          maxLength={ 15 }
           name="cardName"
           value={ cardName }
           data-testid="name-input"
